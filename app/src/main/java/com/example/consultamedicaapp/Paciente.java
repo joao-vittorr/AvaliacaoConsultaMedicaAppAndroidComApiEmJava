@@ -1,16 +1,16 @@
 package com.example.consultamedicaapp;
 
 public class Paciente {
-    private String id;
+    private int id; // Alterado de String para int
     private String nome;
     private String cpf;
 
     // Getters e Setters
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -35,5 +35,3 @@ public class Paciente {
         return nome + " - " + cpf;
     }
 }
-
-

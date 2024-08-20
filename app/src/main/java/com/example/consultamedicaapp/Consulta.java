@@ -3,7 +3,7 @@ package com.example.consultamedicaapp;
 public class Consulta {
     private String descricao;
     private String medico;
-    private String dataHora;
+    private String dataHora; // Formato: yyyy-MM-dd'T'HH:mm:ss
     private Paciente paciente;
 
     // Getters e Setters
