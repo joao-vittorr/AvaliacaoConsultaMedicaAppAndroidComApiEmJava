@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_add_consulta"
+        android:title="Cadastrar Consulta"
+        android:icon="@drawable/ic_add_consulta"
+        android:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/action_add_paciente"
+        android:title="Cadastrar Paciente"
+        android:icon="@drawable/ic_add_paciente"
+        android:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/action_notifications"
+        android:title="Notificações"
+        android:icon="@drawable/ic_notifications"
+        android:showAsAction="ifRoom"/>
+</menu>
