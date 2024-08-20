@@ -30,7 +30,7 @@
         android:id="@+id/spinnerPacientes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:prompt="Selecione o Paciente" />
+        android:prompt="@string/prompt_select_patient" />
 
     <Button
         android:id="@+id/btnSalvarConsulta"

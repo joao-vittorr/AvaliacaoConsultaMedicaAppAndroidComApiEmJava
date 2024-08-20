@@ -1,20 +1,21 @@
-<?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_add_consulta"
-        android:title="Cadastrar Consulta"
-        android:icon="@drawable/ic_add_consulta"
-        android:showAsAction="ifRoom"/>
-
+        android:title="Adicionar Consulta"
+        android:icon="@drawable/ic_add"
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_add_paciente"
-        android:title="Cadastrar Paciente"
-        android:icon="@drawable/ic_add_paciente"
-        android:showAsAction="ifRoom"/>
-
+        android:title="Adicionar Paciente"
+        android:icon="@drawable/ic_add_patient"
+        android:orderInCategory="200"
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_notifications"
         android:title="Notificações"
         android:icon="@drawable/ic_notifications"
-        android:showAsAction="ifRoom"/>
+        android:orderInCategory="300"
+        app:showAsAction="ifRoom" />
 </menu>

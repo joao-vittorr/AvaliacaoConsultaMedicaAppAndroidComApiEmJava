@@ -26,6 +26,15 @@
         <activity
             android:name=".HomeActivity"
             android:exported="true" />
+        <activity
+            android:name=".CadastroConsultaActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ListaPacientesActivity"
+            android:exported="true" />
+        <activity
+            android:name=".NotificacoesActivity"
+            android:exported="true" />
 
     </application>
 </manifest>

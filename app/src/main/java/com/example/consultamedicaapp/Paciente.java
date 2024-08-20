@@ -4,7 +4,7 @@ public class Paciente {
     private String nome;
     private String cpf;
 
-    // Getters e Setters
+    // Getters and setters
     public String getNome() {
         return nome;
     }
@@ -20,4 +20,10 @@ public class Paciente {
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
+
+    @Override
+    public String toString() {
+        return nome; // Exibe o nome do paciente no Spinner
+    }
 }
+
