@@ -1,10 +1,19 @@
 package com.example.consultamedicaapp;
 
 public class Paciente {
+    private String id;
     private String nome;
     private String cpf;
 
-    // Getters and setters
+    // Getters e Setters
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public String getNome() {
         return nome;
     }
@@ -23,7 +32,8 @@ public class Paciente {
 
     @Override
     public String toString() {
-        return nome; // Exibe o nome do paciente no Spinner
+        return nome + " - " + cpf;
     }
 }
+
 

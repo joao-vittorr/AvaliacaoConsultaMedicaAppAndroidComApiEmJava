@@ -6,31 +6,35 @@
     android:padding="16dp">
 
     <EditText
+        android:id="@+id/etCpf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Digite o CPF do paciente"
+        android:inputType="text" />
+
+    <Spinner
+        android:id="@+id/spinnerPacientes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+    <EditText
         android:id="@+id/etDescricao"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Descrição da Consulta"
-        android:inputType="text" />
+        android:hint="Descrição" />
 
     <EditText
         android:id="@+id/etMedico"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Médico"
-        android:inputType="text" />
+        android:hint="Médico" />
 
     <EditText
         android:id="@+id/etDataHora"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Data e Hora (dd/MM/yyyy HH:mm)"
-        android:inputType="datetime" />
-
-    <Spinner
-        android:id="@+id/spinnerPacientes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:prompt="@string/prompt_select_patient" />
+        android:hint="Data e Hora" />
 
     <Button
         android:id="@+id/btnSalvarConsulta"

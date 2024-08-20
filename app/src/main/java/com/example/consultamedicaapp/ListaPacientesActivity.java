@@ -29,6 +29,8 @@ public class ListaPacientesActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private PacienteAdapter pacienteAdapter;
     private List<Paciente> pacienteList;
+    String baseUrl = getResources().getString(R.string.api_base_url);
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,7 +46,7 @@ public class ListaPacientesActivity extends AppCompatActivity {
         recyclerView.setAdapter(pacienteAdapter);
 
         // Atualize a URL se necessário
-        String apiUrl = "http://192.168.3.2:8080/pessoas"; // URL da API para buscar os pacientes
+        String apiUrl = baseUrl + "/pessoas"; // URL da API para buscar os pacientes
 
         // Carrega os dados da API
         new LoadPacientesTask().execute(apiUrl);

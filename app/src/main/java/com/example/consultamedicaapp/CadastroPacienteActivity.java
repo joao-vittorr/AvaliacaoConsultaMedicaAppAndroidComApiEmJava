@@ -22,6 +22,8 @@ public class CadastroPacienteActivity extends AppCompatActivity {
     private EditText etNome, etCpf;
     private Button btnSave, btnDelete;
     private Long pessoaId = null; // Identifica se é uma criação ou edição
+    String baseUrl = getResources().getString(R.string.api_base_url);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +75,7 @@ public class CadastroPacienteActivity extends AppCompatActivity {
         @Override
         protected Boolean doInBackground(Void... voids) {
             try {
-                URL url = new URL("http://192.168.3.2:8080/pessoas");
+                URL url = new URL(baseUrl + "/pessoas");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
                 connection.setRequestProperty("Content-Type", "application/json; utf-8");
@@ -121,7 +123,7 @@ public class CadastroPacienteActivity extends AppCompatActivity {
         @Override
         protected Boolean doInBackground(Void... voids) {
             try {
-                URL url = new URL("http://192.168.3.2:8080/pessoas/" + id);
+                URL url = new URL(baseUrl + "/pessoas/" + id);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("PUT");
                 connection.setRequestProperty("Content-Type", "application/json; utf-8");
@@ -166,7 +168,7 @@ public class CadastroPacienteActivity extends AppCompatActivity {
         @Override
         protected Boolean doInBackground(Void... voids) {
             try {
-                URL url = new URL("http://192.168.3.2:8080/pessoas/" + id);
+                URL url = new URL(baseUrl + "/pessoas/" + id);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("DELETE");
 
