@@ -31,8 +31,15 @@ public class ConsultaAdapter extends RecyclerView.Adapter<ConsultaAdapter.Consul
         holder.tvDescricao.setText(consulta.getDescricao());
         holder.tvMedico.setText(consulta.getMedico());
         holder.tvDataHora.setText(consulta.getDataHora());
-        holder.tvPaciente.setText(consulta.getPaciente());
+
+        // Corrigido para exibir o nome do paciente
+        if (consulta.getPaciente() != null) {
+            holder.tvPaciente.setText(consulta.getPaciente().getNome());
+        } else {
+            holder.tvPaciente.setText("Paciente não informado");
+        }
     }
+
 
     @Override
     public int getItemCount() {

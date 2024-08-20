@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/etDescricao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Descrição da Consulta"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/etMedico"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Médico"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/etDataHora"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Data e Hora (dd/MM/yyyy HH:mm)"
+        android:inputType="datetime" />
+
+    <Spinner
+        android:id="@+id/spinnerPacientes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:prompt="Selecione o Paciente" />
+
+    <Button
+        android:id="@+id/btnSalvarConsulta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Salvar Consulta" />
+</LinearLayout>

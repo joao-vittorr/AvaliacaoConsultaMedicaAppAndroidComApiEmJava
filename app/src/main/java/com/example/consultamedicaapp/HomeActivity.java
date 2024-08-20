@@ -71,7 +71,7 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(new Intent(this, CadastroConsultaActivity.class));
                 return true;
             case R.id.action_add_paciente:
-                startActivity(new Intent(this, CadastroPacienteActivity.class));
+                startActivity(new Intent(this, ListaPacientesActivity.class));
                 return true;
             case R.id.action_notifications:
                 startActivity(new Intent(this, NotificacoesActivity.class));
@@ -80,6 +80,7 @@ public class HomeActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
 
     private class LoadConsultasTask extends AsyncTask<String, Void, String> {
         @Override

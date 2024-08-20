@@ -4,7 +4,7 @@ public class Consulta {
     private String descricao;
     private String medico;
     private String dataHora;
-    private String paciente;
+    private Paciente paciente;
 
     // Getters e Setters
     public String getDescricao() {
@@ -31,11 +31,11 @@ public class Consulta {
         this.dataHora = dataHora;
     }
 
-    public String getPaciente() {
+    public Paciente getPaciente() {
         return paciente;
     }
 
-    public void setPaciente(String paciente) {
+    public void setPaciente(Paciente paciente) {
         this.paciente = paciente;
     }
 }
