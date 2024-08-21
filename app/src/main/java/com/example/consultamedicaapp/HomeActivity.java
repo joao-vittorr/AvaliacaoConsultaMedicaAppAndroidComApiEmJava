@@ -13,6 +13,7 @@ public class HomeActivity extends AppCompatActivity {
     private Button btnAddConsulta;
     private Button btnListPaciente;
     private Button btnAddPaciente;
+    private Button btnListConsultas;
     private Button btnNotifications;
 
     @Override
@@ -22,6 +23,7 @@ public class HomeActivity extends AppCompatActivity {
 
         btnAddConsulta = findViewById(R.id.btnAddConsulta);
         btnListPaciente = findViewById(R.id.btnListPaciente);
+        btnListConsultas = findViewById(R.id.btnListConsultas);
         btnAddPaciente = findViewById(R.id.btnAddPaciente);
         btnNotifications = findViewById(R.id.btnNotifications);
 
@@ -29,6 +31,13 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(HomeActivity.this, CadastroConsultaActivity.class));
+            }
+        });
+
+        btnListConsultas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeActivity.this, ListaConsultasActivity.class));
             }
         });
 

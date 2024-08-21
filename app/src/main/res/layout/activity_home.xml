@@ -10,6 +10,22 @@
     android:background="@android:color/white">
 
     <Button
+        android:id="@+id/btnListConsultas"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_columnSpan="2"
+        android:layout_columnWeight="1"
+        android:layout_row="0"
+        android:background="@drawable/btn_background"
+        android:drawableTop="@drawable/list_consultas"
+        android:gravity="center"
+        android:text="Listar Pacientes"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="14sp" />
+
+    <Button
         android:id="@+id/btnAddConsulta"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

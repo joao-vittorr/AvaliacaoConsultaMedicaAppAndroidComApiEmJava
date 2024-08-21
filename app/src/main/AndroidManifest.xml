@@ -35,6 +35,10 @@
         <activity
             android:name=".NotificacoesActivity"
             android:exported="true" />
+        <activity
+            android:name=".ListaConsultasActivity"
+            android:exported="true" />
+
 
     </application>
 </manifest>
