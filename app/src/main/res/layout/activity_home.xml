@@ -20,7 +20,7 @@
         android:background="@drawable/btn_background"
         android:drawableTop="@drawable/list_consultas"
         android:gravity="center"
-        android:text="Listar Pacientes"
+        android:text="Listar Consultas"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
         android:textSize="14sp" />

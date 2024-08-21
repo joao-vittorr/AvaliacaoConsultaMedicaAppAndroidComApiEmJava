@@ -38,6 +38,11 @@
         <activity
             android:name=".ListaConsultasActivity"
             android:exported="true" />
+        <activity
+            android:name=".EditarConsultaActivity"
+            android:exported="true" />
+
+
 
 
     </application>

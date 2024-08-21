@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Editar Consulta"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:paddingBottom="16dp" />
+
+    <EditText
+        android:id="@+id/editDescricao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Descrição"
+        android:inputType="text"
+        android:paddingBottom="8dp" />
+
+    <EditText
+        android:id="@+id/editMedico"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Médico"
+        android:inputType="text"
+        android:paddingBottom="8dp" />
+
+    <EditText
+        android:id="@+id/editDataHora"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Data e Hora"
+        android:inputType="datetime"
+        android:paddingBottom="8dp" />
+
+    <EditText
+        android:id="@+id/etPaciente"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Paciente"
+        android:inputType="text"
+        android:paddingBottom="16dp" />
+
+    <Button
+        android:id="@+id/btnSalvar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Salvar" />
+
+    <Button
+        android:id="@+id/btnExcluir"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Excluir"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@android:color/holo_red_light"
+        android:textColor="@android:color/white" />
+
+</LinearLayout>

@@ -1,6 +1,8 @@
 package com.example.consultamedicaapp;
 
-public class Paciente {
+import java.io.Serializable;
+
+public class Paciente implements Serializable {
     private int id; // Alterado de String para int
     private String nome;
     private String cpf;

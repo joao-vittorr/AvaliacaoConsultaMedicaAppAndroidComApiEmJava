@@ -1,42 +1,61 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:textColor="@android:color/black">
+    android:padding="16dp">
 
     <TextView
         android:id="@+id/tvDescricao"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Descrição"
-        android:textStyle="bold"
-        android:textSize="16sp"
-        android:textColor="@android:color/black"/>
+        android:text="Descrição da Consulta"
+        android:textSize="16sp"/>
 
     <TextView
         android:id="@+id/tvMedico"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Médico"
-        android:textSize="14sp"
-        android:textColor="@android:color/black"/>
+        android:textSize="14sp"/>
 
     <TextView
         android:id="@+id/tvDataHora"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Data e Hora"
-        android:textSize="14sp"
-        android:textColor="@android:color/black"/>
+        android:textSize="14sp"/>
 
     <TextView
         android:id="@+id/tvPaciente"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Paciente"
-        android:textSize="14sp"
-        android:textColor="@android:color/black"/>
+        android:textSize="14sp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="end"
+        android:layout_marginTop="8dp">
+
+        <Button
+            android:id="@+id/btnEditar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Editar"
+            android:backgroundTint="@android:color/holo_blue_light"
+            android:textColor="@android:color/white"
+            android:layout_marginEnd="8dp"/>
+
+        <Button
+            android:id="@+id/btnExcluir"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Excluir"
+            android:backgroundTint="@android:color/holo_red_light"
+            android:textColor="@android:color/white"/>
+    </LinearLayout>
+
 </LinearLayout>

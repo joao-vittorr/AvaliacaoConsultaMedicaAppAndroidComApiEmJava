@@ -1,12 +1,23 @@
 package com.example.consultamedicaapp;
 
-public class Consulta {
+import java.io.Serializable;
+
+public class Consulta implements Serializable {
+    private int id;
     private String descricao;
     private String medico;
-    private String dataHora; // Formato: yyyy-MM-dd'T'HH:mm:ss
+    private String dataHora;
     private Paciente paciente;
 
-    // Getters e Setters
+    // Getters and setters
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getDescricao() {
         return descricao;
     }

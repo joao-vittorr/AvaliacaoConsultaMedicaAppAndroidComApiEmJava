@@ -17,6 +17,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -44,7 +45,7 @@ public class ListaConsultasActivity extends AppCompatActivity {
         baseUrl = getResources().getString(R.string.api_base_url) + "/consultas";
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        consultaAdapter = new ConsultaAdapter(consultaList);
+        consultaAdapter = new ConsultaAdapter(this, consultaList);
         recyclerView.setAdapter(consultaAdapter);
 
         new LoadConsultasTask().execute(baseUrl);
@@ -106,26 +107,31 @@ public class ListaConsultasActivity extends AppCompatActivity {
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
                         Consulta consulta = new Consulta();
+
+                        // Defina o ID da consulta
+                        consulta.setId(jsonObject.getInt("id"));
+
                         consulta.setDescricao(jsonObject.getString("descricao"));
                         consulta.setMedico(jsonObject.getString("medico"));
                         consulta.setDataHora(jsonObject.getString("dataHora"));
 
-                        // Parsing nested Paciente object
-                        JSONObject pacienteJson = jsonObject.getJSONObject("paciente");
-                        Paciente paciente = new Paciente();
-                        paciente.setNome(pacienteJson.getString("nome"));
-                        paciente.setCpf(pacienteJson.getString("cpf"));
-                        consulta.setPaciente(paciente);
+                        if (jsonObject.has("paciente") && !jsonObject.isNull("paciente")) {
+                            JSONObject pacienteObject = jsonObject.getJSONObject("paciente");
+                            Paciente paciente = new Paciente();
+                            paciente.setId(pacienteObject.getInt("id"));
+                            paciente.setNome(pacienteObject.getString("nome"));
+                            consulta.setPaciente(paciente);
+                        }
 
                         consultaList.add(consulta);
                     }
                     consultaAdapter.notifyDataSetChanged();
                 } catch (JSONException e) {
-                    Log.e("ListaConsultasActivity", "Error parsing JSON", e);
-                    Toast.makeText(ListaConsultasActivity.this, "Error parsing data", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ListaConsultasActivity.this, "Erro ao processar os dados da consulta", Toast.LENGTH_SHORT).show();
+                    Log.e("ListaConsultasActivity", "JSON parsing error", e);
                 }
             } else {
-                Toast.makeText(ListaConsultasActivity.this, "Error fetching data", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ListaConsultasActivity.this, "Falha ao carregar as consultas", Toast.LENGTH_SHORT).show();
             }
         }
     }
