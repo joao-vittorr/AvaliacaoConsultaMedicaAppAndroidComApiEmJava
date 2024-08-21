@@ -29,8 +29,7 @@ public class ListaPacientesActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private PacienteAdapter pacienteAdapter;
     private List<Paciente> pacienteList;
-    String baseUrl = getResources().getString(R.string.api_base_url);
-
+    private String baseUrl;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,11 +44,10 @@ public class ListaPacientesActivity extends AppCompatActivity {
         pacienteAdapter = new PacienteAdapter(pacienteList);
         recyclerView.setAdapter(pacienteAdapter);
 
-        // Atualize a URL se necessário
-        String apiUrl = baseUrl + "/pessoas"; // URL da API para buscar os pacientes
+        // Inicializando baseUrl dentro do onCreate
+        baseUrl = getResources().getString(R.string.api_base_url);
 
-        // Carrega os dados da API
-        new LoadPacientesTask().execute(apiUrl);
+        new LoadPacientesTask().execute(baseUrl + "/pessoas");
     }
 
     private class LoadPacientesTask extends AsyncTask<String, Void, String> {
@@ -57,6 +55,7 @@ public class ListaPacientesActivity extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
             progressBar.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.GONE);
         }
 
         @Override
@@ -99,6 +98,7 @@ public class ListaPacientesActivity extends AppCompatActivity {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
             progressBar.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.VISIBLE);
 
             if (result != null) {
                 try {

@@ -22,7 +22,7 @@ public class CadastroPacienteActivity extends AppCompatActivity {
     private EditText etNome, etCpf;
     private Button btnSave, btnDelete;
     private Long pessoaId = null; // Identifica se é uma criação ou edição
-    String baseUrl = getResources().getString(R.string.api_base_url);
+    private String baseUrl;
 
 
     @Override
@@ -30,6 +30,7 @@ public class CadastroPacienteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_paciente);
 
+        baseUrl = getResources().getString(R.string.api_base_url);
         etNome = findViewById(R.id.etNome);
         etCpf = findViewById(R.id.etCpf);
         btnSave = findViewById(R.id.btnSave);
