@@ -21,12 +21,14 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        // Inicialização dos botões
         btnAddConsulta = findViewById(R.id.btnAddConsulta);
         btnListPaciente = findViewById(R.id.btnListPaciente);
-        btnListConsultas = findViewById(R.id.btnListConsultas);
         btnAddPaciente = findViewById(R.id.btnAddPaciente);
+        btnListConsultas = findViewById(R.id.btnListConsultas);
         btnNotifications = findViewById(R.id.btnNotifications);
 
+        // Configuração do botão de adicionar consulta
         btnAddConsulta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -34,6 +36,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        // Configuração do botão para listar consultas
         btnListConsultas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -41,6 +44,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        // Configuração do botão para listar pacientes
         btnListPaciente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,6 +52,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        // Configuração do botão de adicionar paciente
         btnAddPaciente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,7 +60,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-
+        // Configuração do botão de notificações
         btnNotifications.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

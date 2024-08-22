@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:padding="16dp"
     android:background="@android:color/white">
 
@@ -11,27 +10,33 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Nome"
-        android:textColor="@android:color/black"/>
+        android:textColor="@android:color/black"
+        android:layout_marginBottom="8dp" />
 
     <EditText
         android:id="@+id/etCpf"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/etNome"
         android:hint="CPF"
         android:inputType="number"
-        android:textColor="@android:color/black"/>
+        android:textColor="@android:color/black"
+        android:layout_marginBottom="16dp" />
 
     <Button
         android:id="@+id/btnSave"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Salvar"/>
+        android:layout_below="@id/etCpf"
+        android:text="Salvar" />
 
     <Button
         android:id="@+id/btnDelete"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/btnSave"
         android:text="Deletar"
-        android:visibility="gone"/> <!-- Será exibido apenas ao editar -->
+        android:visibility="gone"
+        android:layout_marginTop="16dp" />
 
-</LinearLayout>
+</RelativeLayout>

@@ -3,9 +3,21 @@ package com.example.consultamedicaapp;
 import java.io.Serializable;
 
 public class Paciente implements Serializable {
-    private int id; // Alterado de String para int
+
+    private int id;
     private String nome;
     private String cpf;
+
+    // Construtor padrão
+    public Paciente() {
+    }
+
+    // Construtor com parâmetros
+    public Paciente(int id, String nome, String cpf) {
+        this.id = id;
+        this.nome = nome;
+        this.cpf = cpf;
+    }
 
     // Getters e Setters
     public int getId() {
@@ -30,10 +42,5 @@ public class Paciente implements Serializable {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
-    }
-
-    @Override
-    public String toString() {
-        return nome + " - " + cpf;
     }
 }
