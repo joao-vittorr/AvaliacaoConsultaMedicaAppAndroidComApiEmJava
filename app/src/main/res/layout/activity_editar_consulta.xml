@@ -39,14 +39,6 @@
         android:inputType="datetime"
         android:paddingBottom="8dp" />
 
-    <EditText
-        android:id="@+id/etPaciente"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Paciente"
-        android:inputType="text"
-        android:paddingBottom="16dp" />
-
     <Button
         android:id="@+id/btnSalvar"
         android:layout_width="match_parent"

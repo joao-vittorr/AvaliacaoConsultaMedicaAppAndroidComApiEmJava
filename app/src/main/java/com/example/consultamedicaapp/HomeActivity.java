@@ -51,9 +51,10 @@ public class HomeActivity extends AppCompatActivity {
         btnAddPaciente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Aqui você pode implementar ou redirecionar para a activity de cadastro de paciente.
+                startActivity(new Intent(HomeActivity.this, CadastroPacienteActivity.class));
             }
         });
+
 
         btnNotifications.setOnClickListener(new View.OnClickListener() {
             @Override

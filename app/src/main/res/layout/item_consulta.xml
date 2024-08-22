@@ -10,28 +10,35 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Descrição da Consulta"
-        android:textSize="16sp"/>
+        android:textSize="16sp"
+        android:textColor="@android:color/black"/>
+
 
     <TextView
         android:id="@+id/tvMedico"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Médico"
-        android:textSize="14sp"/>
+        android:textSize="14sp"
+        android:textColor="@android:color/black"/>
 
     <TextView
         android:id="@+id/tvDataHora"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Data e Hora"
-        android:textSize="14sp"/>
+        android:textSize="14sp"
+        android:textColor="@android:color/black"/>
+
 
     <TextView
         android:id="@+id/tvPaciente"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Paciente"
-        android:textSize="14sp"/>
+        android:textSize="14sp"
+        android:textColor="@android:color/black"/>
+
 
     <LinearLayout
         android:layout_width="match_parent"

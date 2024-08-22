@@ -10,14 +10,16 @@
         android:id="@+id/etNome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Nome"/>
+        android:hint="Nome"
+        android:textColor="@android:color/black"/>
 
     <EditText
         android:id="@+id/etCpf"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="CPF"
-        android:inputType="number"/>
+        android:inputType="number"
+        android:textColor="@android:color/black"/>
 
     <Button
         android:id="@+id/btnSave"

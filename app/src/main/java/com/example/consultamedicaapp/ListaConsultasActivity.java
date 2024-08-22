@@ -17,7 +17,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -41,13 +40,22 @@ public class ListaConsultasActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBar);
         consultaList = new ArrayList<>();
 
-        // Obtenha o baseUrl após o setContentView
         baseUrl = getResources().getString(R.string.api_base_url) + "/consultas";
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         consultaAdapter = new ConsultaAdapter(this, consultaList);
         recyclerView.setAdapter(consultaAdapter);
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        carregarConsultas();
+    }
+
+    private void carregarConsultas() {
+        consultaList.clear();  // Limpar a lista para evitar duplicação
+        consultaAdapter.notifyDataSetChanged(); // Notificar o adapter que a lista foi limpa
         new LoadConsultasTask().execute(baseUrl);
     }
 
@@ -108,9 +116,7 @@ public class ListaConsultasActivity extends AppCompatActivity {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
                         Consulta consulta = new Consulta();
 
-                        // Defina o ID da consulta
                         consulta.setId(jsonObject.getInt("id"));
-
                         consulta.setDescricao(jsonObject.getString("descricao"));
                         consulta.setMedico(jsonObject.getString("medico"));
                         consulta.setDataHora(jsonObject.getString("dataHora"));

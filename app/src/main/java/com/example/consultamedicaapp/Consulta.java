@@ -9,7 +9,20 @@ public class Consulta implements Serializable {
     private String dataHora;
     private Paciente paciente;
 
-    // Getters and setters
+    // Construtor padrão
+    public Consulta() {
+    }
+
+    // Construtor com parâmetros
+    public Consulta(int id, String descricao, String medico, String dataHora, Paciente paciente) {
+        this.id = id;
+        this.descricao = descricao;
+        this.medico = medico;
+        this.dataHora = dataHora;
+        this.paciente = paciente;
+    }
+
+    // Getters e setters
     public int getId() {
         return id;
     }
