@@ -58,7 +58,7 @@ public class CadastroConsultaActivity extends AppCompatActivity {
         baseUrl = getResources().getString(R.string.api_base_url);
 
         // Carregar pacientes da API
-        new LoadPacientesTask().execute(baseUrl + "/pessoas");
+        new LoadPacientesTask().execute(baseUrl + "/pacientes");
 
         // Configurar listener para o botão salvar
         btnSalvarConsulta.setOnClickListener(new View.OnClickListener() {
