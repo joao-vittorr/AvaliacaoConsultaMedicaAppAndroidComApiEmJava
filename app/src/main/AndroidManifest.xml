@@ -30,7 +30,7 @@
             android:name=".CadastroConsultaActivity"
             android:exported="true" />
         <activity
-            android:name=".ListaPacientesActivity"
+            android:name=".ListarPacientesActivity"
             android:exported="true" />
         <activity
             android:name=".NotificacoesActivity"

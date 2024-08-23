@@ -1,194 +1,160 @@
 package com.example.consultamedicaapp;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.OutputStreamWriter;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import org.json.JSONObject;
 
 public class CadastroPacienteActivity extends AppCompatActivity {
 
     private EditText etNome, etCpf;
     private Button btnSave, btnDelete;
-    private Long pessoaId = null; // Identifica se é uma criação ou edição
-    private String baseUrl;
-
+    private Paciente paciente;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_paciente);
 
-        baseUrl = getResources().getString(R.string.api_base_url);
         etNome = findViewById(R.id.etNome);
         etCpf = findViewById(R.id.etCpf);
         btnSave = findViewById(R.id.btnSave);
         btnDelete = findViewById(R.id.btnDelete);
 
-        // Verifica se estamos editando um paciente
-        if (getIntent().hasExtra("pessoaId")) {
-            pessoaId = getIntent().getLongExtra("pessoaId", -1);
-            etNome.setText(getIntent().getStringExtra("pessoaNome"));
-            etCpf.setText(getIntent().getStringExtra("pessoaCpf"));
+        Intent intent = getIntent();
+        if (intent.hasExtra("paciente")) {
+            paciente = (Paciente) intent.getSerializableExtra("paciente");
+            etNome.setText(paciente.getNome());
+            etCpf.setText(paciente.getCpf());
             btnDelete.setVisibility(View.VISIBLE);
         }
 
         btnSave.setOnClickListener(v -> {
-            if (TextUtils.isEmpty(etNome.getText()) || TextUtils.isEmpty(etCpf.getText())) {
-                Toast.makeText(CadastroPacienteActivity.this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            if (pessoaId != null) {
-                new UpdatePessoaTask(pessoaId, etNome.getText().toString(), etCpf.getText().toString()).execute();
+            if (paciente != null) {
+                new UpdatePacienteTask().execute();
             } else {
-                new CreatePessoaTask(etNome.getText().toString(), etCpf.getText().toString()).execute();
+                new CreatePacienteTask().execute();
             }
         });
 
         btnDelete.setOnClickListener(v -> {
-            if (pessoaId != null) {
-                new DeletePessoaTask(pessoaId).execute();
+            if (paciente != null) {
+                new DeletePacienteTask().execute();
             }
         });
     }
 
-    private class CreatePessoaTask extends AsyncTask<Void, Void, Boolean> {
-
-        private String nome, cpf;
-
-        CreatePessoaTask(String nome, String cpf) {
-            this.nome = nome;
-            this.cpf = cpf;
-        }
+    private class CreatePacienteTask extends AsyncTask<Void, Void, String> {
 
         @Override
-        protected Boolean doInBackground(Void... voids) {
+        protected String doInBackground(Void... voids) {
             try {
-                URL url = new URL(baseUrl + "/pessoas");
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestMethod("POST");
-                connection.setRequestProperty("Content-Type", "application/json; utf-8");
-                connection.setDoOutput(true);
+                URL url = new URL(getResources().getString(R.string.api_base_url) + "/pacientes");
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("POST");
+                conn.setRequestProperty("Content-Type", "application/json");
+                conn.setDoOutput(true);
 
-                JSONObject pessoaJson = new JSONObject();
-                pessoaJson.put("nome", nome);
-                pessoaJson.put("cpf", cpf);
+                JSONObject jsonPaciente = new JSONObject();
+                jsonPaciente.put("nome", etNome.getText().toString());
+                jsonPaciente.put("cpf", etCpf.getText().toString());
 
-                OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
-                writer.write(pessoaJson.toString());
-                writer.flush();
-                writer.close();
+                OutputStream os = conn.getOutputStream();
+                os.write(jsonPaciente.toString().getBytes());
+                os.flush();
+                os.close();
 
-                return connection.getResponseCode() == HttpURLConnection.HTTP_OK;
-
+                if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                    return "Paciente criado com sucesso!";
+                } else {
+                    return "Erro ao criar paciente!";
+                }
             } catch (Exception e) {
                 e.printStackTrace();
-                return false;
+                return "Erro ao criar paciente!";
             }
         }
 
         @Override
-        protected void onPostExecute(Boolean success) {
-            if (success) {
-                Toast.makeText(CadastroPacienteActivity.this, "Pessoa criada com sucesso", Toast.LENGTH_SHORT).show();
-                finish();
-            } else {
-                Toast.makeText(CadastroPacienteActivity.this, "Erro ao criar pessoa", Toast.LENGTH_SHORT).show();
-            }
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            Toast.makeText(CadastroPacienteActivity.this, result, Toast.LENGTH_LONG).show();
+            finish();
         }
     }
 
-    private class UpdatePessoaTask extends AsyncTask<Void, Void, Boolean> {
-
-        private Long id;
-        private String nome, cpf;
-
-        UpdatePessoaTask(Long id, String nome, String cpf) {
-            this.id = id;
-            this.nome = nome;
-            this.cpf = cpf;
-        }
+    private class UpdatePacienteTask extends AsyncTask<Void, Void, String> {
 
         @Override
-        protected Boolean doInBackground(Void... voids) {
+        protected String doInBackground(Void... voids) {
             try {
-                URL url = new URL(baseUrl + "/pessoas/" + id);
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestMethod("PUT");
-                connection.setRequestProperty("Content-Type", "application/json; utf-8");
-                connection.setDoOutput(true);
+                URL url = new URL(getResources().getString(R.string.api_base_url) + "/pacientes/" + paciente.getId());
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("PUT");
+                conn.setRequestProperty("Content-Type", "application/json");
+                conn.setDoOutput(true);
 
-                JSONObject pessoaJson = new JSONObject();
-                pessoaJson.put("nome", nome);
-                pessoaJson.put("cpf", cpf);
+                JSONObject jsonPaciente = new JSONObject();
+                jsonPaciente.put("nome", etNome.getText().toString());
+                jsonPaciente.put("cpf", etCpf.getText().toString());
 
-                OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
-                writer.write(pessoaJson.toString());
-                writer.flush();
-                writer.close();
+                OutputStream os = conn.getOutputStream();
+                os.write(jsonPaciente.toString().getBytes());
+                os.flush();
+                os.close();
 
-                return connection.getResponseCode() == HttpURLConnection.HTTP_OK;
-
+                if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                    return "Paciente atualizado com sucesso!";
+                } else {
+                    return "Erro ao atualizar paciente!";
+                }
             } catch (Exception e) {
                 e.printStackTrace();
-                return false;
+                return "Erro ao atualizar paciente!";
             }
         }
 
         @Override
-        protected void onPostExecute(Boolean success) {
-            if (success) {
-                Toast.makeText(CadastroPacienteActivity.this, "Pessoa atualizada com sucesso", Toast.LENGTH_SHORT).show();
-                finish();
-            } else {
-                Toast.makeText(CadastroPacienteActivity.this, "Erro ao atualizar pessoa", Toast.LENGTH_SHORT).show();
-            }
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            Toast.makeText(CadastroPacienteActivity.this, result, Toast.LENGTH_LONG).show();
+            finish();
         }
     }
 
-    private class DeletePessoaTask extends AsyncTask<Void, Void, Boolean> {
-
-        private Long id;
-
-        DeletePessoaTask(Long id) {
-            this.id = id;
-        }
+    private class DeletePacienteTask extends AsyncTask<Void, Void, String> {
 
         @Override
-        protected Boolean doInBackground(Void... voids) {
+        protected String doInBackground(Void... voids) {
             try {
-                URL url = new URL(baseUrl + "/pessoas/" + id);
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestMethod("DELETE");
+                URL url = new URL(getResources().getString(R.string.api_base_url) + "/pacientes/" + paciente.getId());
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("DELETE");
 
-                return connection.getResponseCode() == HttpURLConnection.HTTP_NO_CONTENT;
-
+                if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                    return "Paciente excluído com sucesso!";
+                } else {
+                    return "Erro ao excluir paciente!";
+                }
             } catch (Exception e) {
                 e.printStackTrace();
-                return false;
+                return "Erro ao excluir paciente!";
             }
         }
 
         @Override
-        protected void onPostExecute(Boolean success) {
-            if (success) {
-                Toast.makeText(CadastroPacienteActivity.this, "Pessoa deletada com sucesso", Toast.LENGTH_SHORT).show();
-                finish();
-            } else {
-                Toast.makeText(CadastroPacienteActivity.this, "Erro ao deletar pessoa", Toast.LENGTH_SHORT).show();
-            }
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            Toast.makeText(CadastroPacienteActivity.this, result, Toast.LENGTH_LONG).show();
+            finish();
         }
     }
 }

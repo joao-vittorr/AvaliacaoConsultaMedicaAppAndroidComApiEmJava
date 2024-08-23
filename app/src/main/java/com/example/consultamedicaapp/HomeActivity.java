@@ -48,7 +48,7 @@ public class HomeActivity extends AppCompatActivity {
         btnListPaciente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(HomeActivity.this, ListaPacientesActivity.class));
+                startActivity(new Intent(HomeActivity.this, ListarPacientesActivity.class));
             }
         });
 
