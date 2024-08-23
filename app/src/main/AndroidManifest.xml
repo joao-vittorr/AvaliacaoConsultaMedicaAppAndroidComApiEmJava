@@ -44,8 +44,9 @@
         <activity
             android:name=".CadastroPacienteActivity"
             android:exported="true" />
-
-
+        <activity
+            android:name=".EditarPacienteActivity"
+            android:exported="true" />
 
 
     </application>

@@ -1,5 +1,6 @@
 package com.example.consultamedicaapp;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,6 +31,7 @@ public class ListarPacientesActivity extends AppCompatActivity {
     private PacienteAdapter pacienteAdapter;
     private List<Paciente> pacienteList;
     private String baseUrl;
+    private static final int EDITAR_PACIENTE_REQUEST_CODE = 1;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,7 +47,9 @@ public class ListarPacientesActivity extends AppCompatActivity {
         pacienteAdapter = new PacienteAdapter(pacienteList, new PacienteAdapter.OnPacienteClickListener() {
             @Override
             public void onEditClick(Paciente paciente) {
-                // Adicione lógica para editar o paciente
+                Intent intent = new Intent(ListarPacientesActivity.this, EditarPacienteActivity.class);
+                intent.putExtra("paciente", paciente);
+                startActivityForResult(intent, EDITAR_PACIENTE_REQUEST_CODE); // Solicita um resultado da atividade
             }
 
             @Override
@@ -59,85 +63,75 @@ public class ListarPacientesActivity extends AppCompatActivity {
         // Inicializando baseUrl dentro do onCreate
         baseUrl = getResources().getString(R.string.api_base_url);
 
-        new LoadPacientesTask().execute(baseUrl + "/pacientes");
+        carregarPacientes(); // Carrega a lista de pacientes
     }
 
-    private class LoadPacientesTask extends AsyncTask<String, Void, String> {
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            progressBar.setVisibility(View.VISIBLE);
-            recyclerView.setVisibility(View.GONE);
-        }
-
-        @Override
-        protected String doInBackground(String... strings) {
-            String apiUrl = strings[0];
-            HttpURLConnection connection = null;
-            BufferedReader reader = null;
-            try {
-                URL url = new URL(apiUrl);
-                connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestMethod("GET");
-                connection.connect();
-
-                reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                StringBuilder result = new StringBuilder();
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    result.append(line);
-                }
-
-                return result.toString();
-            } catch (Exception e) {
-                Log.e("ListaPacientesActivity", "Error fetching data", e);
-                return null;
-            } finally {
-                if (connection != null) {
-                    connection.disconnect();
-                }
+    private void carregarPacientes() {
+        new AsyncTask<Void, Void, List<Paciente>>() {
+            @Override
+            protected List<Paciente> doInBackground(Void... voids) {
+                HttpURLConnection connection = null;
+                BufferedReader reader = null;
+                List<Paciente> pacientes = new ArrayList<>();
                 try {
-                    if (reader != null) {
-                        reader.close();
+                    URL url = new URL(baseUrl + "/pacientes");
+                    connection = (HttpURLConnection) url.openConnection();
+                    connection.setRequestMethod("GET");
+                    connection.connect();
+
+                    reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                    StringBuilder result = new StringBuilder();
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        result.append(line);
                     }
-                } catch (Exception e) {
-                    Log.e("ListaPacientesActivity", "Error closing reader", e);
-                }
-            }
-        }
 
-        @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
-            progressBar.setVisibility(View.GONE);
-            recyclerView.setVisibility(View.VISIBLE);
-
-            if (result != null) {
-                try {
-                    JSONArray jsonArray = new JSONArray(result);
+                    JSONArray jsonArray = new JSONArray(result.toString());
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
                         Paciente paciente = new Paciente();
                         paciente.setNome(jsonObject.getString("nome"));
                         paciente.setCpf(jsonObject.getString("cpf"));
                         paciente.setId(jsonObject.getInt("id")); // Adicione o ID
-                        pacienteList.add(paciente);
+                        pacientes.add(paciente);
                     }
-                    pacienteAdapter.notifyDataSetChanged();
-                } catch (JSONException e) {
-                    Log.e("ListaPacientesActivity", "Error parsing JSON", e);
-                    Toast.makeText(ListarPacientesActivity.this, "Error parsing data", Toast.LENGTH_SHORT).show();
+                } catch (Exception e) {
+                    Log.e("ListarPacientesActivity", "Error fetching data", e);
+                } finally {
+                    if (connection != null) {
+                        connection.disconnect();
+                    }
+                    try {
+                        if (reader != null) {
+                            reader.close();
+                        }
+                    } catch (Exception e) {
+                        Log.e("ListarPacientesActivity", "Error closing reader", e);
+                    }
                 }
-            } else {
-                Toast.makeText(ListarPacientesActivity.this, "Error fetching data", Toast.LENGTH_SHORT).show();
+                return pacientes;
             }
-        }
+
+            @Override
+            protected void onPostExecute(List<Paciente> pacientes) {
+                super.onPostExecute(pacientes);
+                progressBar.setVisibility(View.GONE);
+                recyclerView.setVisibility(View.VISIBLE);
+
+                if (pacientes != null) {
+                    pacienteList.clear();
+                    pacienteList.addAll(pacientes);
+                    pacienteAdapter.notifyDataSetChanged();
+                } else {
+                    Toast.makeText(ListarPacientesActivity.this, "Error fetching data", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }.execute();
     }
 
     private void deletePaciente(Paciente paciente) {
         new DeletePacienteTask(paciente).execute();
     }
-
 
     private class DeletePacienteTask extends AsyncTask<Void, Void, Boolean> {
         private Paciente paciente;
@@ -164,7 +158,7 @@ public class ListarPacientesActivity extends AppCompatActivity {
                 int responseCode = connection.getResponseCode();
                 return responseCode == HttpURLConnection.HTTP_NO_CONTENT;
             } catch (Exception e) {
-                Log.e("ListaPacientesActivity", "Error deleting paciente", e);
+                Log.e("ListarPacientesActivity", "Error deleting paciente", e);
                 return false;
             } finally {
                 if (connection != null) {
@@ -186,4 +180,14 @@ public class ListarPacientesActivity extends AppCompatActivity {
             }
         }
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == EDITAR_PACIENTE_REQUEST_CODE && resultCode == RESULT_OK) {
+            carregarPacientes(); // Atualiza a lista de pacientes
+        }
+    }
 }
+

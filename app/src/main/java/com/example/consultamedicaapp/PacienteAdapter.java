@@ -20,16 +20,15 @@ public class PacienteAdapter extends RecyclerView.Adapter<PacienteAdapter.Pacien
         this.listener = listener;
     }
 
-    @NonNull
     @Override
-    public PacienteViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public PacienteViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_paciente, parent, false);
         return new PacienteViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PacienteViewHolder holder, int position) {
+    public void onBindViewHolder(PacienteViewHolder holder, int position) {
         Paciente paciente = pacientes.get(position);
         holder.tvNome.setText(paciente.getNome());
         holder.tvCpf.setText(paciente.getCpf());
@@ -60,4 +59,5 @@ public class PacienteAdapter extends RecyclerView.Adapter<PacienteAdapter.Pacien
         void onDeleteClick(Paciente paciente);
     }
 }
+
 
