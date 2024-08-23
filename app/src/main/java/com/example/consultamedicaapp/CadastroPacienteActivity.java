@@ -37,6 +37,9 @@ public class CadastroPacienteActivity extends AppCompatActivity {
             btnDelete.setVisibility(View.VISIBLE);
         }
 
+        // Adiciona o TextWatcher para aplicar a máscara ao CPF
+        etCpf.addTextChangedListener(new CpfMask(etCpf));
+
         btnSave.setOnClickListener(v -> {
             if (paciente != null) {
                 new UpdatePacienteTask().execute();
@@ -51,6 +54,7 @@ public class CadastroPacienteActivity extends AppCompatActivity {
             }
         });
     }
+
 
     private class CreatePacienteTask extends AsyncTask<Void, Void, String> {
 

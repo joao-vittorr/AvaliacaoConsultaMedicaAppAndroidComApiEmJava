@@ -44,6 +44,9 @@ public class EditarPacienteActivity extends AppCompatActivity {
             etCpf.setText(paciente.getCpf());
         }
 
+        // Adiciona o TextWatcher para aplicar a máscara ao CPF
+        etCpf.addTextChangedListener(new CpfMask(etCpf));
+
         btnSalvar.setOnClickListener(v -> {
             String nome = etNome.getText().toString();
             String cpf = etCpf.getText().toString();
