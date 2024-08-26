@@ -47,6 +47,12 @@
         <activity
             android:name=".EditarPacienteActivity"
             android:exported="true" />
+        <activity
+            android:name=".ForgotPasswordActivity"
+            android:exported="true" />
+        <activity
+            android:name=".SignUpActivity"
+            android:exported="true" />
 
 
     </application>
