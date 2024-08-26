@@ -39,6 +39,9 @@ public class LoginActivity extends AppCompatActivity {
         btnSignUp = findViewById(R.id.btnSignUp);
         btnForgotPassword = findViewById(R.id.btnForgotPassword);
 
+        // Carregar credenciais salvas, se existirem
+        loadUserCredentials();
+
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -133,7 +136,6 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(LoginActivity.this, "Erro ao conectar com o servidor", Toast.LENGTH_SHORT).show();
             }
         }
-
     }
 
     // Método para salvar as credenciais do usuário
@@ -143,5 +145,14 @@ public class LoginActivity extends AppCompatActivity {
         editor.putString("username", username);
         editor.putString("password", password);
         editor.apply();
+    }
+
+    // Método para carregar as credenciais do usuário
+    private void loadUserCredentials() {
+        SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        String username = sharedPreferences.getString("username", "");
+        String password = sharedPreferences.getString("password", "");
+        etUsername.setText(username);
+        etPassword.setText(password);
     }
 }
