@@ -28,14 +28,6 @@ public class SignUpActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private String baseUrl;
 
-    private void saveUserCredentials(String username, String password) {
-        SharedPreferences sharedPref = getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString("username", username);
-        editor.putString("password", password);
-        editor.apply();
-    }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
