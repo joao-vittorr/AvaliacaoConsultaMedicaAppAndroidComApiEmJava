@@ -2,5 +2,6 @@
     <string name="app_name">ConsultaMedicaApp</string>
     <string name="prompt_select_patient">Selecione o Paciente</string>
     <string name="api_base_url">http://192.168.3.2:8080</string>
+    <string name="file_provider_authority">com.example.consultamedicaapp.fileprovider</string>
 
 </resources>

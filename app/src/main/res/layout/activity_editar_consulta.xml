@@ -21,6 +21,7 @@
         android:layout_height="wrap_content"
         android:hint="Descrição"
         android:inputType="text"
+        android:textColor="@android:color/black"
         android:paddingBottom="8dp" />
 
     <EditText
@@ -28,6 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Médico"
+        android:textColor="@android:color/black"
         android:inputType="text"
         android:paddingBottom="8dp" />
 
@@ -36,6 +38,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Data e Hora"
+        android:textColor="@android:color/black"
         android:inputType="datetime"
         android:paddingBottom="8dp" />
 

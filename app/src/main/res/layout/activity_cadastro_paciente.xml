@@ -5,30 +5,68 @@
     android:padding="16dp"
     android:background="@android:color/white">
 
-    <EditText
-        android:id="@+id/etNome"
+    <!-- Layout horizontal para imagem e campos de texto -->
+    <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Nome"
-        android:textColor="@android:color/black"
-        android:layout_marginBottom="8dp" />
+        android:orientation="horizontal"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="16dp">
 
-    <EditText
-        android:id="@+id/etCpf"
+        <!-- ImageView para exibir a foto -->
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginEnd="16dp"
+            android:contentDescription="Imagem Capturada"
+            android:scaleType="centerCrop"
+            android:background="@android:color/darker_gray"/>
+
+        <!-- Layout vertical para campos de texto -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/etNome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nome"
+                android:textColor="@android:color/black"
+                android:layout_marginBottom="8dp" />
+
+            <EditText
+                android:id="@+id/etCpf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="CPF"
+                android:inputType="number"
+                android:textColor="@android:color/black"
+                android:layout_marginBottom="16dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnTakePhoto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/etNome"
-        android:hint="CPF"
-        android:inputType="number"
-        android:textColor="@android:color/black"
-        android:layout_marginBottom="16dp" />
+        android:text="Tirar Foto"
+        android:layout_below="@id/linearLayout"
+        android:layout_marginBottom="8dp"/>
 
     <Button
         android:id="@+id/btnSave"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/etCpf"
-        android:text="Salvar" />
+        android:text="Salvar"
+        android:layout_below="@id/btnTakePhoto"
+        android:layout_marginBottom="16dp"/>
 
     <Button
         android:id="@+id/btnDelete"

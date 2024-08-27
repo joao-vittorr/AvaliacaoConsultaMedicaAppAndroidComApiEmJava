@@ -92,7 +92,8 @@ public class ListarPacientesActivity extends AppCompatActivity {
                         Paciente paciente = new Paciente();
                         paciente.setNome(jsonObject.getString("nome"));
                         paciente.setCpf(jsonObject.getString("cpf"));
-                        paciente.setId(jsonObject.getInt("id")); // Adicione o ID
+                        paciente.setId(jsonObject.getInt("id")); // Adiciona o ID
+                        paciente.setFoto(jsonObject.getString("foto")); // Adiciona o campo foto
                         pacientes.add(paciente);
                     }
                 } catch (Exception e) {
@@ -128,6 +129,7 @@ public class ListarPacientesActivity extends AppCompatActivity {
             }
         }.execute();
     }
+
 
     private void deletePaciente(Paciente paciente) {
         new DeletePacienteTask(paciente).execute();
