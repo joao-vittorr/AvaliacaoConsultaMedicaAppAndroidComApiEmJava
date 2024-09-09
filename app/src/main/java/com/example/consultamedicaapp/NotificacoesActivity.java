@@ -31,6 +31,7 @@ public class NotificacoesActivity extends AppCompatActivity {
 
         // Adicione a lógica para buscar notificações da API
         // Aqui, vamos adicionar notificações de exemplo
+        notificacaoList.add(new Notificacao("FALTOU FAZER O BACK ENVIAR A NOTIFICAÇÃO às 14:00"));
         notificacaoList.add(new Notificacao("Consulta com Dr. Silva às 14:00"));
         notificacaoList.add(new Notificacao("Consulta de retorno às 10:00 amanhã"));
 

@@ -1,5 +1,6 @@
 package com.example.consultamedicaapp;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -66,6 +67,7 @@ public class ListarPacientesActivity extends AppCompatActivity {
         carregarPacientes(); // Carrega a lista de pacientes
     }
 
+    @SuppressLint("StaticFieldLeak")
     private void carregarPacientes() {
         new AsyncTask<Void, Void, List<Paciente>>() {
             @Override
